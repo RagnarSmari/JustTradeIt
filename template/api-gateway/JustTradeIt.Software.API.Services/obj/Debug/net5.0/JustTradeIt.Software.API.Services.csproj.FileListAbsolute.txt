@@ -1,0 +1,17 @@
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/bin/Debug/net5.0/JustTradeIt.Software.API.Services.deps.json
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/bin/Debug/net5.0/JustTradeIt.Software.API.Services.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/bin/Debug/net5.0/ref/JustTradeIt.Software.API.Services.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/bin/Debug/net5.0/JustTradeIt.Software.API.Services.pdb
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/bin/Debug/net5.0/JustTradeIt.Software.API.Models.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/bin/Debug/net5.0/JustTradeIt.Software.API.Repositories.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/bin/Debug/net5.0/JustTradeIt.Software.API.Repositories.pdb
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/bin/Debug/net5.0/JustTradeIt.Software.API.Models.pdb
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/obj/Debug/net5.0/JustTradeIt.Software.API.Services.csproj.AssemblyReference.cache
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/obj/Debug/net5.0/JustTradeIt.Software.API.Services.GeneratedMSBuildEditorConfig.editorconfig
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/obj/Debug/net5.0/JustTradeIt.Software.API.Services.AssemblyInfoInputs.cache
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/obj/Debug/net5.0/JustTradeIt.Software.API.Services.AssemblyInfo.cs
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/obj/Debug/net5.0/JustTradeIt.Software.API.Services.csproj.CoreCompileInputs.cache
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/obj/Debug/net5.0/JustTradeIt.Software.API.Services.csproj.CopyComplete
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/obj/Debug/net5.0/JustTradeIt.Software.API.Services.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/obj/Debug/net5.0/ref/JustTradeIt.Software.API.Services.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/obj/Debug/net5.0/JustTradeIt.Software.API.Services.pdb

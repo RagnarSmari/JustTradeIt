@@ -1,0 +1,12 @@
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/bin/Debug/net5.0/JustTradeIt.Software.API.Models.deps.json
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/bin/Debug/net5.0/JustTradeIt.Software.API.Models.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/bin/Debug/net5.0/ref/JustTradeIt.Software.API.Models.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/bin/Debug/net5.0/JustTradeIt.Software.API.Models.pdb
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/obj/Debug/net5.0/JustTradeIt.Software.API.Models.csproj.AssemblyReference.cache
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/obj/Debug/net5.0/JustTradeIt.Software.API.Models.GeneratedMSBuildEditorConfig.editorconfig
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/obj/Debug/net5.0/JustTradeIt.Software.API.Models.AssemblyInfoInputs.cache
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/obj/Debug/net5.0/JustTradeIt.Software.API.Models.AssemblyInfo.cs
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/obj/Debug/net5.0/JustTradeIt.Software.API.Models.csproj.CoreCompileInputs.cache
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/obj/Debug/net5.0/JustTradeIt.Software.API.Models.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/obj/Debug/net5.0/ref/JustTradeIt.Software.API.Models.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/obj/Debug/net5.0/JustTradeIt.Software.API.Models.pdb
