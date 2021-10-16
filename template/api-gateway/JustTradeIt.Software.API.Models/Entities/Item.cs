@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace JustTradeIt.Software.API.Models.Entities
 {
     public class Item
@@ -7,9 +11,10 @@ namespace JustTradeIt.Software.API.Models.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public string ShortDescription { get; set; }
-        
+        public ItemCondition ItemCondition { get; set; }
+        public User OwnerId { get; set; }
         // Both of these are foreign keys in this table
-        public int ItemConditionId { get; set; }
-        public int OwnerId { get; set; }
+        public ICollection<User> Users { get; set; }
+        public ICollection<Trade> Trades { get; set; }
     }
 }

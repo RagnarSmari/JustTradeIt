@@ -6,6 +6,6 @@ namespace JustTradeIt.Software.API.Models.Entities
         public string ImageUrl { get; set; }
         
         // Foreign key to Itemtable
-        public int ItemId { get; set; }
+        public Item Item { get; set; }
     }
 }
