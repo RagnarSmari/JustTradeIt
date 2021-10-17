@@ -12,7 +12,8 @@ namespace JustTradeIt.Software.API.Models.Entities
         public string ProfileImageUrl { get; set; }
         public string HashedPassword { get; set; }
         
-        public ICollection<Trade> Trades { get; set; }
-        public ICollection<Item> Items { get; set; }
+        public ICollection<Trade> Senders { get; set; }
+        public ICollection<Trade> Recievers { get; set; }
+        public ICollection<TradeItem> TradeItems { get; set; }
     }
 }

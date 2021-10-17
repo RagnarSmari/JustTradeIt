@@ -20,7 +20,8 @@ namespace JustTradeIt.Software.API.Models.Entities
         public int RecieverId { get; set; }
         public int SenderId { get; set; }
         
-        public ICollection<User> Users { get; set; }
-        public ICollection<Item> Items { get; set; }
+        public virtual User Reciever { get; set; }
+        public virtual User Sender { get; set; }
+        public ICollection<TradeItem> TradeItems { get; set; }
     }
 }
