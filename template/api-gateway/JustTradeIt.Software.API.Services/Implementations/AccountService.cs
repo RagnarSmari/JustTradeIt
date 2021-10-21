@@ -7,6 +7,10 @@ namespace JustTradeIt.Software.API.Services.Implementations
 {
     public class AccountService : IAccountService
     {
+        public bool IsTokenBlacklisted(int tokenId)
+        {
+            throw new System.NotImplementedException();
+        }
         public UserDto AuthenticateUser(LoginInputModel loginInputModel)
         {
             throw new System.NotImplementedException();

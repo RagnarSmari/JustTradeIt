@@ -6,6 +6,7 @@ namespace JustTradeIt.Software.API.Services.Interfaces
 {
     public interface IAccountService
     {
+        bool IsTokenBlacklisted(int tokenId);
         UserDto CreateUser(RegisterInputModel inputModel);
         UserDto AuthenticateUser(LoginInputModel loginInputModel);
         void Logout(int tokenId);
