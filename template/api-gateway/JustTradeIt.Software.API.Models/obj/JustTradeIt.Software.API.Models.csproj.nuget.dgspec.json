@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\raggi\\OneDrive\\Skjöl\\Háskóli\\3.Önn\\Veft\\Final\\JustTradeIt\\template\\api-gateway\\JustTradeIt.Software.API.Models\\JustTradeIt.Software.API.Models.csproj": {}
+    "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/JustTradeIt.Software.API.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\raggi\\OneDrive\\Skjöl\\Háskóli\\3.Önn\\Veft\\Final\\JustTradeIt\\template\\api-gateway\\JustTradeIt.Software.API.Models\\JustTradeIt.Software.API.Models.csproj": {
+    "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/JustTradeIt.Software.API.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\raggi\\OneDrive\\Skjöl\\Háskóli\\3.Önn\\Veft\\Final\\JustTradeIt\\template\\api-gateway\\JustTradeIt.Software.API.Models\\JustTradeIt.Software.API.Models.csproj",
+        "projectUniqueName": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/JustTradeIt.Software.API.Models.csproj",
         "projectName": "JustTradeIt.Software.API.Models",
-        "projectPath": "C:\\Users\\raggi\\OneDrive\\Skjöl\\Háskóli\\3.Önn\\Veft\\Final\\JustTradeIt\\template\\api-gateway\\JustTradeIt.Software.API.Models\\JustTradeIt.Software.API.Models.csproj",
-        "packagesPath": "C:\\Users\\raggi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\raggi\\OneDrive\\Skjöl\\Háskóli\\3.Önn\\Veft\\Final\\JustTradeIt\\template\\api-gateway\\JustTradeIt.Software.API.Models\\obj\\",
+        "projectPath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/JustTradeIt.Software.API.Models.csproj",
+        "packagesPath": "/home/ragnar/.nuget/packages/",
+        "outputPath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\raggi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/ragnar/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
         }
       }
     }

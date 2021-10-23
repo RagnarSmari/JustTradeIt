@@ -10,10 +10,7 @@ namespace JustTradeIt.Software.API.Repositories.Interfaces
         void UpdateProfile(string email, string profileImageUrl, ProfileInputModel profile);
         UserDto GetProfileInformation(string email);
         UserDto GetUserInformation(string userIdentifier);
-
-        UserDto Login(LoginInputModel login);
-        void Logout(int tokenId);
-        bool IsTokenBlacklisted(int tokenId);
+        
         
         
     }
