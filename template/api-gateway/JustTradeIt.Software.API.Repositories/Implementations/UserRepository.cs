@@ -77,9 +77,9 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             };
         }
 
-        public UserDto GetProfileInformation(string email)
+        public UserDto GetProfileInformation(string name)
         {
-            var user = _db.Users.FirstOrDefault(u => u.Email == email);
+            var user = _db.Users.FirstOrDefault(u => u.FullName == name);
             var token = new JwtToken();
             if (user == null) {return null;}
 

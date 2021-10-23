@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 using JustTradeIt.Software.API.Models.Enums;
 
 namespace JustTradeIt.Software.API.Models.Dtos
@@ -9,6 +10,7 @@ namespace JustTradeIt.Software.API.Models.Dtos
         public string FullName { get; set; }
         public string Email { get; set; }
         public string ProfileImageUrl { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int TokenId { get; set; }
     }
 }

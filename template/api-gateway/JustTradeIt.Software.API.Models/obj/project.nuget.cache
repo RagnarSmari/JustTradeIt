@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CVWsqQJjCG9pfgcpI1IDkOnpXtl/b4AwNI1wnC3o9aSgamW9fz50hUFPIppy7Wiju5tXfpa1er9e7KveaExTLA==",
+  "dgSpecHash": "9u7VwI5OQvC+mFQTKG9DI6K+dBBwOo12ofW5gMbo5Ap5wjj5zqdQKnnQ9vEeah2RWPvZuTnU3yrKDPFbz/ZeHA==",
   "success": true,
-  "projectFilePath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/JustTradeIt.Software.API.Models.csproj",
+  "projectFilePath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API.Models/JustTradeIt.Software.API.Models.csproj",
   "expectedPackageFiles": [
     "/home/ragnar/.nuget/packages/microsoft.aspnetcore.http/2.2.2/microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
     "/home/ragnar/.nuget/packages/microsoft.aspnetcore.http.abstractions/2.2.0/microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

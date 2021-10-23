@@ -41,9 +41,11 @@ namespace JustTradeIt.Software.API.Services.Implementations
 
         public Task UpdateProfile(string email, ProfileInputModel profile)
         {
-            var image = profile.ProfileImage.ToString();
-            _userRepository.UpdateProfile(email, image, profile);
             throw new Exception();
+            // var image = profile.ProfileImage.ToString();
+            // // Update the profile
+            // _userRepository.UpdateProfile(email, image, profile);
+            
         }
     }
 }

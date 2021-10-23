@@ -13,9 +13,10 @@ namespace JustTradeIt.Software.API.Models.Entities
         public string ShortDescription { get; set; }
         
         // Both of these are foreign keys in this table
-        public ItemCondition ItemCondition { get; set; }
+        public int ItemCondition { get; set; }
         public User Owner { get; set; }
-        
+        public ItemCondition ItemConditionLink {get; set;}
         public ICollection<TradeItem> TradeItems { get; set; }
+        public ICollection<ItemImage> ItemImages {get; set;}
     }
 }

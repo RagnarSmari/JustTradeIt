@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = JustTradeIt.Software.API.Repositories
-build_property.ProjectDir = /home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Repositories/
+build_property.ProjectDir = /home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API.Repositories/
