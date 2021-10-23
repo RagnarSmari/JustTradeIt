@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using JustTradeIt.Software.API.Models.InputModels;
+using JustTradeIt.Software.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,13 +12,26 @@ namespace JustTradeIt.Software.API.Controllers
     [Route("api/account")]
     public class AccountController : ControllerBase
     {
+        private readonly IAccountService _accountService;
+        private readonly ITokenService _tokenService;
+
+        public AccountController(IAccountService accountService, ITokenService tokenService)
+        {
+            _accountService = accountService;
+            _tokenService = tokenService;
+        }
+
         // TODO: Setup routes
+        
 
         [AllowAnonymous]
-        [HttpPost, Route("/register")]
+        [HttpPost]
+        [Route("/register")]
         public ActionResult Register([FromBody] RegisterInputModel register)
         {
-            return NoContent();
+            // Creates a new user
+            var user = _accountService.CreateUser(register);
+            return Ok(user);
         }
         
         
@@ -24,16 +40,25 @@ namespace JustTradeIt.Software.API.Controllers
         [Route("/login")]
         public IActionResult LogIn([FromBody] LoginInputModel login)
         {
-            // TODO: Call a authenticationService
-            // TODO: Return valid JWT Token
-            return Ok();
+            var user = _accountService.AuthenticateUser(login);
+            if (user == null)
+            {
+                return Unauthorized(); 
+            }
+            
+            return Ok(_tokenService.GenerateJwtToken(user));
         }
 
-        [HttpGet, Route("/logout")]
-        public IActionResult SignOut()
+        [HttpGet]
+        [Route("/logout")]
+        public IActionResult Logout()
         {
             // TODO: Retrieve token id from claim and blacklist token
-            return NoContent();
+            //int.TryParse(User.Claims.FirstOrDefault(c => c.Type == "int")?.Value, out var tokenId);
+            int.TryParse(User.Claims.FirstOrDefault(c => c.Type == "tokenId").Value, out var tokenId);
+            _accountService.VoidToken(tokenId);
+
+                return NoContent();
         }
         
         [HttpGet, Route("/profile")]

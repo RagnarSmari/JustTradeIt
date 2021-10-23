@@ -9,16 +9,18 @@ namespace JustTradeIt.Software.API.Controllers
     public class UserController : ControllerBase
     {
         // TODO: Setup routes
-        [HttpGet, Route("/{id:int]")]
-        public IActionResult GetUserInformation(int id)
+        [HttpGet]
+        [Route("/{identifier}")]
+        public IActionResult GetUserInformation(string identifier)
         {
             // Get a user profile information
             // TODO: Call the UserService 
             return Ok();
         }
-
-        [HttpGet, Route("/{id:int}/trades")]
-        public IActionResult GetUserTrades(int id)
+        
+        [HttpGet]
+        [Route("/{identifier}/trades")]
+        public IActionResult GetUserTrades(string identifier)
         {
             // Get all successful trades associated with a user
             // TODO: Call the UserService 

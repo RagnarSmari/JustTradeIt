@@ -15,7 +15,7 @@ namespace JustTradeIt.Software.API.Controllers
         {
             // TODO: Call the TradeService
             // TODO: Returns a list of all trades
-            return NoContent();
+            return Ok();
         }
 
         [HttpPost, Route("")]
