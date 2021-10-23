@@ -26,7 +26,7 @@ namespace JustTradeIt.Software.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("/register")]
+        [Route("register")]
         public ActionResult Register([FromBody] RegisterInputModel register)
         {
             // Creates a new user
@@ -37,7 +37,7 @@ namespace JustTradeIt.Software.API.Controllers
         
         [AllowAnonymous]
         [HttpPost]
-        [Route("/login")]
+        [Route("login")]
         public IActionResult LogIn([FromBody] LoginInputModel login)
         {
             var user = _accountService.AuthenticateUser(login);
@@ -50,29 +50,24 @@ namespace JustTradeIt.Software.API.Controllers
         }
 
         [HttpGet]
-        [Route("/logout")]
+        [Route("logout")]
         public IActionResult Logout()
         {
             // TODO: Retrieve token id from claim and blacklist token
-            //int.TryParse(User.Claims.FirstOrDefault(c => c.Type == "int")?.Value, out var tokenId);
             int.TryParse(User.Claims.FirstOrDefault(c => c.Type == "tokenId").Value, out var tokenId);
-            _accountService.VoidToken(tokenId);
-
-                return NoContent();
+            Console.WriteLine(tokenId);
+            _accountService.Logout(tokenId);
+            return NoContent();
         }
         
-        [HttpGet, Route("/profile")]
+        [HttpGet, Route("profile")]
         public IActionResult GetProfile()
         {
-            var claims = User.Claims.Select(c => new
-            {
-                Type = c.Type,
-                Value = c.Value
-            });
-            return Ok(claims);
+            var email = User.Claims.FirstOrDefault(c => c.Type == "Name").Value;
+            return Ok(email);
         }
 
-        [HttpPut, Route("/profile")]
+        [HttpPut, Route("profile")]
         public IActionResult UpdateProfile([FromBody] ProfileInputModel profile)
         {
             // TODO: Call the authenticationService

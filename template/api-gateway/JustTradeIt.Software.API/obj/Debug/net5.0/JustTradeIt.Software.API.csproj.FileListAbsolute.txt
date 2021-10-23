@@ -147,4 +147,3 @@ C:/Users/raggi/OneDrive/Skjöl/Háskóli/3.Önn/Veft/Final/JustTradeIt/template/
 C:/Users/raggi/OneDrive/Skjöl/Háskóli/3.Önn/Veft/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API/obj/Debug/net5.0/ref/JustTradeIt.Software.API.dll
 C:/Users/raggi/OneDrive/Skjöl/Háskóli/3.Önn/Veft/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API/obj/Debug/net5.0/JustTradeIt.Software.API.pdb
 C:/Users/raggi/OneDrive/Skjöl/Háskóli/3.Önn/Veft/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API/obj/Debug/net5.0/JustTradeIt.Software.API.genruntimeconfig.cache
-/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API/obj/Debug/net5.0/JustTradeIt.Software.API.csproj.CopyComplete
