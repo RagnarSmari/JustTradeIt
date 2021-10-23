@@ -63,14 +63,19 @@ namespace JustTradeIt.Software.API.Controllers
         [HttpGet, Route("profile")]
         public IActionResult GetProfile()
         {
-            var email = User.Claims.FirstOrDefault(c => c.Type == "Name").Value;
-            return Ok(email);
+
+            var name = User.Claims.FirstOrDefault(c => c.Type == "FullName").Value;
+            Console.WriteLine(name);
+            var user = _accountService.GetProfileInformation(name);
+            return Ok(user);
         }
 
         [HttpPut, Route("profile")]
         public IActionResult UpdateProfile([FromBody] ProfileInputModel profile)
         {
             // TODO: Call the authenticationService
+            var email = User.Claims.FirstOrDefault(c => c.Type == "email").Value;
+            _accountService.UpdateProfile(email, profile);
             return NoContent();
         }
     }

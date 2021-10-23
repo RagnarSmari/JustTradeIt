@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "frBXxbkIq4LBEMQ8A4wAW/hx+ebSEDDlkM8KJwn8OBZf2HdeqAnK2cKS8M0kyhDy8w9azcVTKmHXFkeBlMKgIA==",
+  "dgSpecHash": "7leMJK7nPHKcjn9xdFa8hW51HOGbVoewDAHHRgN+jVs1NriEpyQ2iJV7mF3zbK9lcJ8cRy2coACHNfvyM8KmdQ==",
   "success": true,
-  "projectFilePath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API/JustTradeIt.Software.API.csproj",
+  "projectFilePath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API/JustTradeIt.Software.API.csproj",
   "expectedPackageFiles": [
     "/home/ragnar/.nuget/packages/awssdk.core/3.7.3.20/awssdk.core.3.7.3.20.nupkg.sha512",
     "/home/ragnar/.nuget/packages/awssdk.s3/3.7.3.13/awssdk.s3.3.7.3.13.nupkg.sha512",
