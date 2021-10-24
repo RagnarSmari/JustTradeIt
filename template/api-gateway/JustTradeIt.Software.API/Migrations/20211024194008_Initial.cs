@@ -35,6 +35,23 @@ namespace JustTradeIt.Software.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PublicIdentifier = table.Column<string>(type: "TEXT", nullable: true),
+                    FullName = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    ProfileImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    HashedPassword = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Items",
                 columns: table => new
                 {
@@ -44,7 +61,8 @@ namespace JustTradeIt.Software.API.Migrations
                     Title = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     ShortDescription = table.Column<string>(type: "TEXT", nullable: true),
-                    ItemConditionId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ItemConditionId = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     OwnerId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
@@ -55,7 +73,44 @@ namespace JustTradeIt.Software.API.Migrations
                         column: x => x.ItemConditionId,
                         principalTable: "ItemConditions",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Items_Users_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Trades",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PublicIdentifier = table.Column<string>(type: "TEXT", nullable: true),
+                    IssueDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ModifiedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    TradeStatus = table.Column<int>(type: "INTEGER", nullable: false),
+                    RecieverId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SenderId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trades", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Trades_Users_RecieverId",
+                        column: x => x.RecieverId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Trades_Users_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,56 +150,18 @@ namespace JustTradeIt.Software.API.Migrations
                         principalTable: "Items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Trades",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    PublicIdentifier = table.Column<string>(type: "TEXT", nullable: true),
-                    IssueDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ModifiedBy = table.Column<string>(type: "TEXT", nullable: true),
-                    TradeStatus = table.Column<int>(type: "INTEGER", nullable: false),
-                    RecieverId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SenderId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ItemId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Trades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Trades_Items_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "Items",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    PublicIdentifier = table.Column<string>(type: "TEXT", nullable: true),
-                    FullName = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    ProfileImageUrl = table.Column<string>(type: "TEXT", nullable: true),
-                    HashedPassword = table.Column<string>(type: "TEXT", nullable: true),
-                    TradeId = table.Column<int>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Trades_TradeId",
+                        name: "FK_TradeItems_Trades_TradeId",
                         column: x => x.TradeId,
                         principalTable: "Trades",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TradeItems_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -173,11 +190,6 @@ namespace JustTradeIt.Software.API.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trades_ItemId",
-                table: "Trades",
-                column: "ItemId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Trades_RecieverId",
                 table: "Trades",
                 column: "RecieverId");
@@ -186,67 +198,10 @@ namespace JustTradeIt.Software.API.Migrations
                 name: "IX_Trades_SenderId",
                 table: "Trades",
                 column: "SenderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_TradeId",
-                table: "Users",
-                column: "TradeId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Items_Users_OwnerId",
-                table: "Items",
-                column: "OwnerId",
-                principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TradeItems_Trades_TradeId",
-                table: "TradeItems",
-                column: "TradeId",
-                principalTable: "Trades",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TradeItems_Users_UserId",
-                table: "TradeItems",
-                column: "UserId",
-                principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Trades_Users_RecieverId",
-                table: "Trades",
-                column: "RecieverId",
-                principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Trades_Users_SenderId",
-                table: "Trades",
-                column: "SenderId",
-                principalTable: "Users",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Trades_Items_ItemId",
-                table: "Trades");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Trades_Users_RecieverId",
-                table: "Trades");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Trades_Users_SenderId",
-                table: "Trades");
-
             migrationBuilder.DropTable(
                 name: "ItemImages");
 
@@ -260,13 +215,13 @@ namespace JustTradeIt.Software.API.Migrations
                 name: "Items");
 
             migrationBuilder.DropTable(
+                name: "Trades");
+
+            migrationBuilder.DropTable(
                 name: "ItemConditions");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Trades");
         }
     }
 }

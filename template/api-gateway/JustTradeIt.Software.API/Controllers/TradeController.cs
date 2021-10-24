@@ -1,4 +1,6 @@
+using System.Linq;
 using JustTradeIt.Software.API.Models.InputModels;
+using JustTradeIt.Software.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +11,13 @@ namespace JustTradeIt.Software.API.Controllers
     [ApiController]
     public class TradeController : ControllerBase
     {
+        private readonly ITradeService _tradesService;
+
+        public TradeController(ITradeService tradesService)
+        {
+            _tradesService = tradesService;
+        }
+
         // TODO: Setup routes
         [HttpGet, Route("")]
         public IActionResult GetAllTrades()
@@ -18,13 +27,14 @@ namespace JustTradeIt.Software.API.Controllers
             return Ok();
         }
 
-        [HttpPost, Route("")]
+        [HttpPost]
+        [Route("")]
         public IActionResult PostTrade([FromBody] TradeInputModel trade)
         {
             // TODO: Requests a trade to a particular user.
-            // Trade Proposal always includes at least one item from each participant. 
-            // Therefore if you want to acquire a certain item, you must offer some of your
-            // items which you believe are equally valuable as the desired item
+            // Expecting that the first item in the 
+            var userName = User.Claims.FirstOrDefault(c => c.Type == "FullName").Value;
+            var name = _tradesService.CreateTradeRequest(userName, trade);
             return Ok();
         }
 

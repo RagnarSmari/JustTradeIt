@@ -25,7 +25,10 @@ namespace JustTradeIt.Software.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ItemConditionId")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ItemConditionId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("OwnerId")
@@ -183,15 +186,17 @@ namespace JustTradeIt.Software.API.Migrations
 
             modelBuilder.Entity("JustTradeIt.Software.API.Models.Entities.Item", b =>
                 {
-                    b.HasOne("JustTradeIt.Software.API.Models.Entities.ItemCondition", "ItemCondition")
+                    b.HasOne("JustTradeIt.Software.API.Models.Entities.ItemCondition", "ItemConditionLink")
                         .WithMany()
-                        .HasForeignKey("ItemConditionId");
+                        .HasForeignKey("ItemConditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("JustTradeIt.Software.API.Models.Entities.User", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
 
-                    b.Navigation("ItemCondition");
+                    b.Navigation("ItemConditionLink");
 
                     b.Navigation("Owner");
                 });
@@ -199,7 +204,7 @@ namespace JustTradeIt.Software.API.Migrations
             modelBuilder.Entity("JustTradeIt.Software.API.Models.Entities.ItemImage", b =>
                 {
                     b.HasOne("JustTradeIt.Software.API.Models.Entities.Item", "Item")
-                        .WithMany()
+                        .WithMany("ItemImages")
                         .HasForeignKey("ItemId");
 
                     b.Navigation("Item");
@@ -253,6 +258,8 @@ namespace JustTradeIt.Software.API.Migrations
 
             modelBuilder.Entity("JustTradeIt.Software.API.Models.Entities.Item", b =>
                 {
+                    b.Navigation("ItemImages");
+
                     b.Navigation("TradeItems");
                 });
 

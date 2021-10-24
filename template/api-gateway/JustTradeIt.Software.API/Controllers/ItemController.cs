@@ -1,3 +1,4 @@
+using System;
 using JustTradeIt.Software.API.Services.Interfaces;
 using JustTradeIt.Software.API.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -40,18 +41,21 @@ namespace JustTradeIt.Software.API.Controllers
             // TODO: Call the ItemService
             // Create a new item which will be associated with the authenticated user
             // and other users will see the new item and can request a trade to acquire that item
-            var email = User.Claims.FirstOrDefault(c => c.Type == "Email").Value;
+            var email = User.Claims.FirstOrDefault(c => c.Type == "FullName").Value;
+            Console.WriteLine(email);
             var item = _itemService.AddNewItem(email, model);
             return Ok(item);
         }
 
-        [HttpDelete, Route("")]
-        public IActionResult DeleteITem()
+        [HttpDelete, Route("{identifier}")]
+        public IActionResult DeleteITem(string identifier)
         {
             // TODO: Call the ItemService
             // Delete an item from the inventory of the authenticated user.
             // The item should only be soft deleted from the database.
             // All trade requests which include the deleted item should be marked as cancelled
+            var name = User.Claims.FirstOrDefault(c => c.Type == "FullName").Value;
+            _itemService.RemoveItem(name, identifier);
             return Ok();
         }
         

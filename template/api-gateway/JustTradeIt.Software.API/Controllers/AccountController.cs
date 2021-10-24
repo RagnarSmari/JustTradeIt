@@ -74,7 +74,8 @@ namespace JustTradeIt.Software.API.Controllers
         public IActionResult UpdateProfile([FromBody] ProfileInputModel profile)
         {
             // TODO: Call the authenticationService
-            var email = User.Claims.FirstOrDefault(c => c.Type == "email").Value;
+            var email = User.Claims.FirstOrDefault(c => c.Type == "FullName").Value;
+            Console.WriteLine(email);
             _accountService.UpdateProfile(email, profile);
             return NoContent();
         }
