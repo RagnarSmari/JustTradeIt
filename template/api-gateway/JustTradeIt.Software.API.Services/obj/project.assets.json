@@ -1404,11 +1404,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API.Services/JustTradeIt.Software.API.Services.csproj",
+      "projectUniqueName": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/JustTradeIt.Software.API.Services.csproj",
       "projectName": "JustTradeIt.Software.API.Services",
-      "projectPath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API.Services/JustTradeIt.Software.API.Services.csproj",
+      "projectPath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/JustTradeIt.Software.API.Services.csproj",
       "packagesPath": "/home/ragnar/.nuget/packages/",
-      "outputPath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API.Services/obj/",
+      "outputPath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Services/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/ragnar/.nuget/NuGet/NuGet.Config"
@@ -1423,11 +1423,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "/home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API.Models/JustTradeIt.Software.API.Models.csproj": {
-              "projectPath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API.Models/JustTradeIt.Software.API.Models.csproj"
+            "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/JustTradeIt.Software.API.Models.csproj": {
+              "projectPath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Models/JustTradeIt.Software.API.Models.csproj"
             },
-            "/home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API.Repositories/JustTradeIt.Software.API.Repositories.csproj": {
-              "projectPath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API.Repositories/JustTradeIt.Software.API.Repositories.csproj"
+            "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Repositories/JustTradeIt.Software.API.Repositories.csproj": {
+              "projectPath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Repositories/JustTradeIt.Software.API.Repositories.csproj"
             }
           }
         }

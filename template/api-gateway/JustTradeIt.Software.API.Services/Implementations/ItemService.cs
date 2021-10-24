@@ -29,7 +29,7 @@ namespace JustTradeIt.Software.API.Services.Implementations
 
         public void RemoveItem(string email, string itemIdentifier)
         {
-            throw new System.NotImplementedException();
+            _itemRepo.RemoveItem(email, itemIdentifier);
         }
     }
 }

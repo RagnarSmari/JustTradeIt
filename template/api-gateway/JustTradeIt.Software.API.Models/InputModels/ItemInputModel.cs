@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using JustTradeIt.Software.API.Models.CustomAttributes;
 using JustTradeIt.Software.API.Models.Enums;
 
 namespace JustTradeIt.Software.API.Models.InputModels
@@ -14,7 +15,8 @@ namespace JustTradeIt.Software.API.Models.InputModels
         [Required]
         public string Description { get; set; }
         [Required]
-        public int ConditionCode { get; set; }
+        [ItemConditions]
+        public string ConditionCode { get; set; }
         [Url]
         public IEnumerable<string> ItemImages { get; set; }
     }
