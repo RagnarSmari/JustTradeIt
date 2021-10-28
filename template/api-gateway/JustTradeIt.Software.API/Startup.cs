@@ -1,3 +1,5 @@
+using System;
+using EventFlow.RabbitMQ;
 using JustTradeIt.Software.API.Middlewares;
 using JustTradeIt.Software.API.Repositories.Data;
 using JustTradeIt.Software.API.Repositories.Implementations;
@@ -12,7 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-
+using RabbitMQ;
+using RabbitMQ.Client;
 
 namespace JustTradeIt.Software.API
 {
@@ -31,7 +34,7 @@ namespace JustTradeIt.Software.API
 
             services.AddMvc();
             //Service layer
-
+            
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IItemService, ItemService>();

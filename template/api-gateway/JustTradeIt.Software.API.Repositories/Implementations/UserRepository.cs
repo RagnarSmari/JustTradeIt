@@ -26,12 +26,15 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             var user = _db.Users.FirstOrDefault(c =>
                 c.Email == login.Email &&
                 c.HashedPassword == HashPassword(login.Password, _salt));
-            if (user == null){ return null; }
+            if (user == null)
+            {
+                throw new Exception("User not found or credentials are incorrect");
+            }
 
             var token = new JwtToken();
-
             _db.JwtTokens.Add(token);
             _db.SaveChanges();
+            
             return new UserDto
             {
                 Identifier = user.PublicIdentifier,
@@ -45,26 +48,30 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
 
         public UserDto CreateUser(RegisterInputModel inputModel)
         {
-            // TODO remove this url and make it use the service or something
-            var profileImageUrl = "https://www.realmenrealstyle.com/wp-content/uploads/2021/06/man-face.jpg";
-            // Create a new JWT token for the user
-            //var token = _tokenRepository.CreateNewToken();
+            // Check if there is a user in the database with that email already
+            if (_db.Users.FirstOrDefault(c => c.Email == inputModel.Email) != null)
+            {
+                // TODO make new exception
+                throw new Exception("There is already a user with that email");
+            }
+            // Create a new JWT token
             var token = new JwtToken();
-            _db.JwtTokens.Add(token);
             // Create a new identifier for the new user
             var identifier = Guid.NewGuid().ToString();
             
-            // Create the user which goes into the database, but we will return the dto
+            // Hash the password
+            // Create the user which goes into the database, 
             var user = new User
             {
                 PublicIdentifier = identifier,
                 FullName = inputModel.FullName,
                 Email = inputModel.Email,
-                ProfileImageUrl = profileImageUrl,
                 HashedPassword = HashPassword(inputModel.Password, _salt)
             };
+            
             // Add the stuff to the database, save changes and return the userDto
             _db.Users.Add(user);
+            _db.JwtTokens.Add(token);
             
             _db.SaveChanges();
             return new UserDto()
@@ -73,15 +80,18 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 FullName = user.FullName,
                 Email = user.Email,
                 ProfileImageUrl = user.ProfileImageUrl,
-                TokenId = token.Id,
             };
         }
 
         public UserDto GetProfileInformation(string name)
         {
-            var user = _db.Users.FirstOrDefault(u => u.FullName == name);
+            var user = _db.Users.FirstOrDefault(u => u.Email == name);
             var token = new JwtToken();
-            if (user == null) {return null;}
+            if (user == null)
+            {
+                // TODO throw exception
+                throw new Exception("User not found");
+            }
 
             var newuser = new UserDto
             {
@@ -89,21 +99,40 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 FullName = user.FullName,
                 Email = user.Email,
                 ProfileImageUrl = user.ProfileImageUrl,
-                TokenId = token.Id
             };
             return newuser;
         }
 
         public UserDto GetUserInformation(string userIdentifier)
         {
-            throw new NotImplementedException();
+            var user = _db.Users.FirstOrDefault(u => u.PublicIdentifier == userIdentifier);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            return new UserDto
+            {
+                Identifier = user.PublicIdentifier,
+                FullName = user.FullName,
+                Email = user.Email,
+                ProfileImageUrl = user.ProfileImageUrl,
+            };
         }
         
 
         public void UpdateProfile(string email, string profileImageUrl, ProfileInputModel profile)
         {
-            // TODO 
-            throw new NotImplementedException();
+            var user = _db.Users.FirstOrDefault(u => u.Email == email);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+            // Change the name and the image
+            user.FullName = profile.fullName;
+            user.ProfileImageUrl = profileImageUrl;
+            _db.SaveChanges();
+
         }
 
         public static string HashPassword(string password, string salt)

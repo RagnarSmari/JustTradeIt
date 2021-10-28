@@ -221,3 +221,6 @@ C:/Users/raggi/OneDrive/Skjöl/Háskóli/3.Önn/Veft/Final/JustTradeIt/template/
 /home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API/obj/Debug/net5.0/ref/JustTradeIt.Software.API.dll
 /home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API/obj/Debug/net5.0/JustTradeIt.Software.API.pdb
 /home/ragnar/Documents/Háskóli/3.Önn/Vefþ/Final/JustTradeIt/template/api-gateway/JustTradeIt.Software.API/obj/Debug/net5.0/JustTradeIt.Software.API.genruntimeconfig.cache
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API/bin/Debug/net5.0/Newtonsoft.Json.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API/bin/Debug/net5.0/EventFlow.dll
+/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API/bin/Debug/net5.0/EventFlow.RabbitMQ.dll

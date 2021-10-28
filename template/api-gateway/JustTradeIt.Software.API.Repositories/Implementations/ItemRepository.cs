@@ -22,14 +22,22 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
         
         public string AddNewItem(string email, ItemInputModel item)
         {
-            // TODO put ItemImages in the Item which goes into the database
             var itemCondition = _db.ItemConditions.FirstOrDefault(c => c.ConditionCode == item.ConditionCode);
             if (itemCondition == null)
             {
                 // Create the new item
                 itemCondition = CreateNewItemCondition(item.ConditionCode);
             }
-            var owner = _db.Users.FirstOrDefault(c => c.FullName == email);
+            // Check if the item already exists 
+            if (_db.Items.FirstOrDefault(c => c.Title == item.Title) != null)
+            {
+                throw new Exception("Item already exists with that Title");
+            }
+            var owner = _db.Users.FirstOrDefault(c => c.Email == email);
+            if (owner == null)
+            {
+                throw new Exception("Authenticated user not found");
+            }
             var newItem = new Item{
                 PublicIdentifier = Guid.NewGuid().ToString(),
                 Title = item.Title,
@@ -39,6 +47,16 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 Owner = owner,
                 IsDeleted = false,
             };
+            // Add the images to the ItemImages 
+            Console.WriteLine(newItem.ItemImages);
+            foreach (var image in item.ItemImages)
+            {
+                _db.ItemImages.Add(new ItemImage()
+                {
+                    ImageUrl = image,
+                    Item = newItem
+                });
+            }
             _db.Items.Add(newItem);
             _db.SaveChanges();
             return newItem.PublicIdentifier;
@@ -60,25 +78,37 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
         public Envelope<ItemDto> GetAllItems(int maxPages, int pageSize, int pageNumber, bool ascendingSortOrder)
         {
             var allItems = _db.Items
-            .Include(c => c.Owner)
-            .Where( c=> c.IsDeleted == false)
-            .Select(c => new ItemDto{
-                Identifier = c.PublicIdentifier,
-                Title = c.Title,
-                ShortDescription = c.ShortDescription,
-                Owner = new UserDto{
-                    Identifier = c.Owner.PublicIdentifier,
-                    FullName = c.Owner.FullName,
-                    Email = c.Owner.Email,
-                    ProfileImageUrl = c.Owner.ProfileImageUrl,
-                }
-            });
+                .Include(c => c.Owner)
+                .Where(c => c.IsDeleted == false)
+                .Select(c => new ItemDto
+                {
+                    Identifier = c.PublicIdentifier,
+                    Title = c.Title,
+                    ShortDescription = c.ShortDescription,
+                    Owner = new UserDto
+                    {
+                        Identifier = c.Owner.PublicIdentifier,
+                        FullName = c.Owner.FullName,
+                        Email = c.Owner.Email,
+                        ProfileImageUrl = c.Owner.ProfileImageUrl,
+                    }
+                });
+            if (ascendingSortOrder)
+            {
+                return new Envelope<ItemDto>{
+                    PageSize = pageSize,
+                    PageNumber = pageNumber,
+                    MaxPages = maxPages,
+                    Items = allItems.OrderBy(c => c.Title)
+                }; 
+            }
             return new Envelope<ItemDto>{
                 PageSize = pageSize,
                 PageNumber = pageNumber,
                 MaxPages = maxPages,
-                Items = allItems
-            }; 
+                Items = allItems.OrderByDescending(c => c.Title)
+            };
+
         }
 
         public ItemDetailsDto GetItemByIdentifier(string identifier)
@@ -88,15 +118,15 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 .Include(c => c.Owner)
                 .Include(c => c.TradeItems)
                 .ThenInclude(c => c.Trade)
-                .FirstOrDefault(c => c.PublicIdentifier == identifier);
+                .FirstOrDefault(c => c.PublicIdentifier == identifier && c.IsDeleted == false);
+            
             // TODO implement item not found exception
-            // if (item.IsDeleted == true)
-            // {
-            //     throw new ItemnotFoundException();
-            // }
-            var itemId = item.Id;
+            if (item == null)
+            {
+                throw new Exception("Item not found");
+            }
+            
             var activeTrades = item.TradeItems.Count(c => c.Trade.TradeStatus.ToString() == "Pending");
-
             var newItem = new ItemDetailsDto
             {
                 Identifier = item.PublicIdentifier,
@@ -104,7 +134,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 Description = item.Description,
                 Images = item.ItemImages.Select(c => new ImageDto{
                     Id = c.Id,
-                    ImageUlr = c.ImageUrl
+                    ImageUrl = c.ImageUrl
                 }),
                 NumberOfActiveTradeRequests = activeTrades,
                 Condition = _db.ItemConditions.Where(s => s.Id == item.ItemConditionId)
@@ -132,11 +162,11 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 .ThenInclude(c => c.Trade)
                 .FirstOrDefault(c => c.PublicIdentifier == identifier);
             
-            var user = _db.Users.FirstOrDefault(c => c.FullName == email);
+            var user = _db.Users.FirstOrDefault(c => c.Email == email);
             // TODO IMPLEMENT exception
             if (user.Id != item.Owner.Id)
             {
-                throw new Exception();
+                throw new Exception("Item is not linked to authenticated User");
             }
             
             // Soft delete the item

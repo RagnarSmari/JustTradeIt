@@ -4,37 +4,50 @@
 Token: 
 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
 
+AccessKeyId: AKIA5STCBBGXEOPYZXD3 
+Secret Access Key: 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 
+
+"Aws": {
+    "BucketName": "raggistradebucket",
+    "KeyId": "AAKIA5STCBBGXEOPYZXD3",
+    "KeySecret": "A3zCqegXBtHKnQ2Nww9Tssj6vR9+kbYO9tGCSeLB"
+  }
+
 
 TODO overall:
-Finish the webapi project
-setup rabbitmq service
-setup docker compose
 
-How to start the project:
-Setup the Entities
-Setup the database and all the relations first
-Setup the endpoints
-Setup the authentication system
+Finish the Notification service
+Check where to upload images to aws bucket and in what routes
+Finish the aws bucket
+Test all the routes
+Test with the PostmanScript
+
+Little todo:
+Global exception handler
+Upload images to aws s3 bucket when updateing a profile
 
 
 
 
 ROUTES:
 
+
+
 AccountController:
 
-POST Register -> done
-POST login -> done
-GET logout -> done
-GET profile -> done
+POST Register -> done -> tested
+POST login -> done -> tested
+GET logout -> done -> tested
+GET profile -> done -> tested
 PUT profile -> not implemented
-
+	Request not working as postman says unsupported media type
+	
 
 TradeController:
-GET trades -> not implemented
-POST trades -> not implemented
-GET trade/id -> not implemented
-PUT trade/id -> not implemented
+GET trades -> done
+POST trades -> done
+GET trade/id -> done
+PUT trade/id -> done
 
 ItemController:
 GET items -> done
@@ -43,6 +56,11 @@ POST items -> done
 DELETE items/id -> done
 
 UserController
-GET users/id -> not implemented
-GET users/id/trades -> not implemented
+GET users/id -> done
+GET users/id/trades -> done
+
+
+
+RabbitMQ:
+This service works as a glue between the other services to communicate with each other via AMQP
 

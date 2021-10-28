@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JustTradeIt.Software.API.Migrations
 {
     [DbContext(typeof(JustTradeItDbContext))]
-    [Migration("20211024194008_Initial")]
+    [Migration("20211028102550_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

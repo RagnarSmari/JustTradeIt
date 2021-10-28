@@ -16,14 +16,10 @@ namespace JustTradeIt.Software.API.Controllers
         public ItemController(IItemService itemService){
             _itemService = itemService;
         }
-        // TODO: Setup routes
         [HttpGet, Route("")]
-        public IActionResult GetAllItems(int pageNumber=1,int pageSize=1, int MaxPages=5 ,bool order=true)
+        public IActionResult GetAllItems(int pageNumber=1,int pageSize=1, int MaxPages=5 , [FromQuery] bool ascendingSortOrder=true)
         {
-            // TODO: Call ItemService
-            // TODO: Returns a list of all items
-            // The result is an envelope containing the results in a page
-            var allItems = _itemService.GetItems(pageNumber,pageSize, MaxPages, order );
+            var allItems = _itemService.GetItems(pageNumber,pageSize, MaxPages, ascendingSortOrder );
             return Ok(allItems);
         }
 
@@ -38,11 +34,7 @@ namespace JustTradeIt.Software.API.Controllers
         [HttpPost, Route("")]
         public IActionResult NewITem([FromBody] ItemInputModel model)
         {
-            // TODO: Call the ItemService
-            // Create a new item which will be associated with the authenticated user
-            // and other users will see the new item and can request a trade to acquire that item
-            var email = User.Claims.FirstOrDefault(c => c.Type == "FullName").Value;
-            Console.WriteLine(email);
+            var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             var item = _itemService.AddNewItem(email, model);
             return Ok(item);
         }
@@ -50,11 +42,7 @@ namespace JustTradeIt.Software.API.Controllers
         [HttpDelete, Route("{identifier}")]
         public IActionResult DeleteITem(string identifier)
         {
-            // TODO: Call the ItemService
-            // Delete an item from the inventory of the authenticated user.
-            // The item should only be soft deleted from the database.
-            // All trade requests which include the deleted item should be marked as cancelled
-            var name = User.Claims.FirstOrDefault(c => c.Type == "FullName").Value;
+            var name = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             _itemService.RemoveItem(name, identifier);
             return Ok();
         }

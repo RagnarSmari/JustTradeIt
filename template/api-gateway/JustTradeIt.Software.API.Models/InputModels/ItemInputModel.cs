@@ -17,7 +17,6 @@ namespace JustTradeIt.Software.API.Models.InputModels
         [Required]
         [ItemConditions]
         public string ConditionCode { get; set; }
-        [Url]
         public IEnumerable<string> ItemImages { get; set; }
     }
 }

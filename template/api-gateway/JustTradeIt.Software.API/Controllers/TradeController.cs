@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using JustTradeIt.Software.API.Models.Dtos;
+using JustTradeIt.Software.API.Models.Enums;
 using JustTradeIt.Software.API.Models.InputModels;
 using JustTradeIt.Software.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -17,45 +21,58 @@ namespace JustTradeIt.Software.API.Controllers
         {
             _tradesService = tradesService;
         }
-
-        // TODO: Setup routes
+        
         [HttpGet, Route("")]
-        public IActionResult GetAllTrades()
+        public IActionResult GetAllTrades([FromQuery] bool onlyCompleted=false, [FromQuery] bool onlyIncludeActive=false)
         {
-            // TODO: Call the TradeService
-            // TODO: Returns a list of all trades
-            return Ok();
+            var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
+            IEnumerable<TradeDto> allTrades;
+            if (onlyCompleted && !onlyIncludeActive)
+            {
+                allTrades = _tradesService.GetTrades(email);
+            }
+
+            else if (onlyIncludeActive && !onlyCompleted)
+            {
+                allTrades = _tradesService.GetTradeRequests(email);
+            }
+            else if (onlyIncludeActive && onlyCompleted)
+            {
+                // Does not make sense to have both true my guys
+                throw new Exception("Cannot have both true");
+            }
+            else
+            {
+                var comple = _tradesService.GetTrades(email);
+                var active = _tradesService.GetTradeRequests(email);
+                allTrades = comple.Concat(active);
+            }
+            return Ok(allTrades);
         }
 
         [HttpPost]
         [Route("")]
         public IActionResult PostTrade([FromBody] TradeInputModel trade)
         {
-            // TODO: Requests a trade to a particular user.
-            // Expecting that the first item in the 
-            var userName = User.Claims.FirstOrDefault(c => c.Type == "FullName").Value;
+            var userName = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             var name = _tradesService.CreateTradeRequest(userName, trade);
-            return Ok();
+            return Ok(name);
         }
 
-        [HttpGet, Route("{id:int}")]
-        public IActionResult GetTrade(int id)
+        [HttpGet, Route("{identifier}")]
+        public IActionResult GetTrade(string identifier)
         {
             // Get a detailed version of a trade request
-            // TODO: Call the TradeService
-            // TODO: Returns a TradeDetailDto
-            return Ok();
+            var item = _tradesService.GetTradeByIdentifer(identifier);
+            return Ok(item);
         }
 
-        [HttpPut, Route("{id:int}")]
-        public IActionResult PutTrade(int id)
+        [HttpPatch, Route("{identifier}")]
+        public IActionResult PutTrade(string identifier, [FromBody] string newStatus)
         {
-            // Updates the status of a trade request.
-            // ONly a participant of the trade offering can update the status
-            // of the trade request.
-            // Although if the trade request is in a finalized start it cannot be altered.
-            // The only non finalized state is the pending state
-            return Ok();
+            string name = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
+            _tradesService.UpdateTradeRequest(identifier, name, newStatus);
+            return NoContent();
         }
     }
 }

@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net5.0": {
-      "AWSSDK.Core/3.7.3.20": {
+      "AWSSDK.Core/3.7.3.26": {
         "type": "package",
         "compile": {
           "lib/netcoreapp3.1/AWSSDK.Core.dll": {}
@@ -11,10 +11,10 @@
           "lib/netcoreapp3.1/AWSSDK.Core.dll": {}
         }
       },
-      "AWSSDK.S3/3.7.3.13": {
+      "AWSSDK.S3/3.7.3.19": {
         "type": "package",
         "dependencies": {
-          "AWSSDK.Core": "[3.7.3.20, 4.0.0)"
+          "AWSSDK.Core": "[3.7.3.26, 4.0.0)"
         },
         "compile": {
           "lib/netcoreapp3.1/AWSSDK.S3.dll": {}
@@ -333,6 +333,15 @@
           "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
         }
       },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
       "RabbitMQ.Client/6.2.2": {
         "type": "package",
         "dependencies": {
@@ -441,6 +450,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "AWSSDK.S3": "3.7.3.19",
           "Microsoft.AspNetCore.Http": "2.2.2"
         },
         "compile": {
@@ -468,15 +478,15 @@
     }
   },
   "libraries": {
-    "AWSSDK.Core/3.7.3.20": {
-      "sha512": "e7cWjwfYQx4b1wes/OMQLuJHUQeAr3uGj8qNl9Itw0S32HyaMDkDQcFKT4aVfTsBK3FSMhLULR2BjoZ2IC5z4w==",
+    "AWSSDK.Core/3.7.3.26": {
+      "sha512": "qaA6CLNM/Ey8Ih7qyTpHqYpQBqfOeL+Ut/G+Z4oIQNWy5T15b7SiY6rdOJgtSUOcKeIrArqc293C5OqxZNrZOA==",
       "type": "package",
-      "path": "awssdk.core/3.7.3.20",
+      "path": "awssdk.core/3.7.3.26",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "awssdk.core.3.7.3.20.nupkg.sha512",
+        "awssdk.core.3.7.3.26.nupkg.sha512",
         "awssdk.core.nuspec",
         "lib/net35/AWSSDK.Core.dll",
         "lib/net35/AWSSDK.Core.pdb",
@@ -493,16 +503,16 @@
         "tools/account-management.ps1"
       ]
     },
-    "AWSSDK.S3/3.7.3.13": {
-      "sha512": "nW0+aZOE4W/BRd1MJcbHTAjNZQ+mOKbbiiZa8YQ6TWMzf2MixIOor2m5yYVQLF2dATBh42x0mMUmRvnBHBOn7A==",
+    "AWSSDK.S3/3.7.3.19": {
+      "sha512": "5/svYVqVHd1Ne17cm11Jtbbz+wEzcGTPlxUWTkwdTwCM57aQGy3WihbC10t5ate+34sW69EHs/ffZ1qkL3gcJw==",
       "type": "package",
-      "path": "awssdk.s3/3.7.3.13",
+      "path": "awssdk.s3/3.7.3.19",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "analyzers/dotnet/cs/AWSSDK.S3.CodeAnalysis.dll",
-        "awssdk.s3.3.7.3.13.nupkg.sha512",
+        "awssdk.s3.3.7.3.19.nupkg.sha512",
         "awssdk.s3.nuspec",
         "lib/net35/AWSSDK.S3.dll",
         "lib/net35/AWSSDK.S3.pdb",
@@ -1033,6 +1043,33 @@
         "microsoft.net.http.headers.nuspec"
       ]
     },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "RabbitMQ.Client/6.2.2": {
       "sha512": "+tJSgE+rQXgLvOxWvOxdZ0+No1EMa86+puZuNlCb4cNryHw2PY2Xiw/y2dz/WWdeJQp74Y2UnNXPkuLiYpvn+A==",
       "type": "package",
@@ -1386,7 +1423,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "AWSSDK.S3 >= 3.7.3.13",
+      "AWSSDK.S3 >= 3.7.3.19",
       "JustTradeIt.Software.API.Models >= 1.0.0",
       "JustTradeIt.Software.API.Repositories >= 1.0.0",
       "Microsoft.AspNetCore.Cryptography.KeyDerivation >= 5.0.10",
@@ -1394,6 +1431,7 @@
       "Microsoft.Extensions.Configuration >= 5.0.0",
       "Microsoft.Extensions.Configuration.Binder >= 5.0.0",
       "Microsoft.IdentityModel.Tokens >= 6.13.1",
+      "Newtonsoft.Json >= 13.0.1",
       "RabbitMQ.Client >= 6.2.2",
       "System.IdentityModel.Tokens.Jwt >= 6.13.1"
     ]
@@ -1444,7 +1482,7 @@
         "dependencies": {
           "AWSSDK.S3": {
             "target": "Package",
-            "version": "[3.7.3.13, )"
+            "version": "[3.7.3.19, )"
           },
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
             "target": "Package",
@@ -1465,6 +1503,10 @@
           "Microsoft.IdentityModel.Tokens": {
             "target": "Package",
             "version": "[6.13.1, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.1, )"
           },
           "RabbitMQ.Client": {
             "target": "Package",

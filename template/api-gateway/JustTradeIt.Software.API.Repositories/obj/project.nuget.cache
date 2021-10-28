@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "F8lXaH4zi/212vWx8u2tjBfBtcj6T6rmPrx1NUDNaXxN4Eaw4XIfA/Bx9TEXn82SvKcFTXeyibkK6pLsE5v5SQ==",
+  "dgSpecHash": "X96V2WQTSWISBtSwZ5JKsM3DV45Q7A3QBMrE50mbuBKThF8XTcYsx/nCARmjAA80LpAnxJ8CgfkoleUykAQJSQ==",
   "success": true,
   "projectFilePath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Repositories/JustTradeIt.Software.API.Repositories.csproj",
   "expectedPackageFiles": [
+    "/home/ragnar/.nuget/packages/awssdk.core/3.7.3.26/awssdk.core.3.7.3.26.nupkg.sha512",
+    "/home/ragnar/.nuget/packages/awssdk.s3/3.7.3.19/awssdk.s3.3.7.3.19.nupkg.sha512",
     "/home/ragnar/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/home/ragnar/.nuget/packages/microsoft.aspnetcore.cryptography.internal/5.0.10/microsoft.aspnetcore.cryptography.internal.5.0.10.nupkg.sha512",
     "/home/ragnar/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/5.0.10/microsoft.aspnetcore.cryptography.keyderivation.5.0.10.nupkg.sha512",

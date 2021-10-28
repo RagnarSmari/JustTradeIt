@@ -17,6 +17,25 @@
           "JustTradeIt.Software.API.Repositories.dll": {}
         }
       },
+      "AWSSDK.Core/3.7.3.26": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.3.26"
+          }
+        }
+      },
+      "AWSSDK.S3/3.7.3.19": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.3.26"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.S3.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.3.19"
+          }
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "runtime": {
           "lib/netstandard2.0/Humanizer.dll": {
@@ -279,6 +298,7 @@
       "System.Text.Encodings.Web/4.5.0": {},
       "JustTradeIt.Software.API.Models/1.0.0": {
         "dependencies": {
+          "AWSSDK.S3": "3.7.3.19",
           "Microsoft.AspNetCore.Http": "2.2.2"
         },
         "runtime": {
@@ -292,6 +312,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AWSSDK.Core/3.7.3.26": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qaA6CLNM/Ey8Ih7qyTpHqYpQBqfOeL+Ut/G+Z4oIQNWy5T15b7SiY6rdOJgtSUOcKeIrArqc293C5OqxZNrZOA==",
+      "path": "awssdk.core/3.7.3.26",
+      "hashPath": "awssdk.core.3.7.3.26.nupkg.sha512"
+    },
+    "AWSSDK.S3/3.7.3.19": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5/svYVqVHd1Ne17cm11Jtbbz+wEzcGTPlxUWTkwdTwCM57aQGy3WihbC10t5ate+34sW69EHs/ffZ1qkL3gcJw==",
+      "path": "awssdk.s3/3.7.3.19",
+      "hashPath": "awssdk.s3.3.7.3.19.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace JustTradeIt.Software.API.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/account")]
     public class AccountController : ControllerBase
     {
@@ -20,8 +21,6 @@ namespace JustTradeIt.Software.API.Controllers
             _accountService = accountService;
             _tokenService = tokenService;
         }
-
-        // TODO: Setup routes
         
 
         [AllowAnonymous]
@@ -53,9 +52,7 @@ namespace JustTradeIt.Software.API.Controllers
         [Route("logout")]
         public IActionResult Logout()
         {
-            // TODO: Retrieve token id from claim and blacklist token
             int.TryParse(User.Claims.FirstOrDefault(c => c.Type == "tokenId").Value, out var tokenId);
-            Console.WriteLine(tokenId);
             _accountService.Logout(tokenId);
             return NoContent();
         }
@@ -64,18 +61,15 @@ namespace JustTradeIt.Software.API.Controllers
         public IActionResult GetProfile()
         {
 
-            var name = User.Claims.FirstOrDefault(c => c.Type == "FullName").Value;
-            Console.WriteLine(name);
+            var name = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             var user = _accountService.GetProfileInformation(name);
             return Ok(user);
         }
 
         [HttpPut, Route("profile")]
-        public IActionResult UpdateProfile([FromBody] ProfileInputModel profile)
+        public IActionResult UpdateProfile([FromForm] ProfileInputModel profile)
         {
-            // TODO: Call the authenticationService
-            var email = User.Claims.FirstOrDefault(c => c.Type == "FullName").Value;
-            Console.WriteLine(email);
+            var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             _accountService.UpdateProfile(email, profile);
             return NoContent();
         }
