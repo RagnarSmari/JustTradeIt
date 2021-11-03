@@ -4,6 +4,7 @@ using JustTradeIt.Software.API.Models;
 using JustTradeIt.Software.API.Models.Entities;
 using JustTradeIt.Software.API.Models.Dtos;
 using JustTradeIt.Software.API.Models.Enums;
+using JustTradeIt.Software.API.Models.Exceptions;
 using JustTradeIt.Software.API.Models.InputModels;
 using JustTradeIt.Software.API.Repositories.Data;
 using JustTradeIt.Software.API.Repositories.Interfaces;
@@ -48,16 +49,22 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 IsDeleted = false,
             };
             // Add the images to the ItemImages 
-            Console.WriteLine(newItem.ItemImages);
-            foreach (var image in item.ItemImages)
+            if (item.ItemImages != null)
             {
-                _db.ItemImages.Add(new ItemImage()
+                
+                foreach (var image in item.ItemImages)
                 {
-                    ImageUrl = image,
-                    Item = newItem
-                });
+                    _db.ItemImages.Add(new ItemImage()
+                    {
+                        ImageUrl = image,
+                        ItemId = newItem.Id,
+                        Item = newItem
+                    });
+                }
+                _db.Items.Add(newItem);
+                
             }
-            _db.Items.Add(newItem);
+
             _db.SaveChanges();
             return newItem.PublicIdentifier;
         }
@@ -120,10 +127,9 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 .ThenInclude(c => c.Trade)
                 .FirstOrDefault(c => c.PublicIdentifier == identifier && c.IsDeleted == false);
             
-            // TODO implement item not found exception
             if (item == null)
             {
-                throw new Exception("Item not found");
+                throw new ResourceNotFoundException();
             }
             
             var activeTrades = item.TradeItems.Count(c => c.Trade.TradeStatus.ToString() == "Pending");

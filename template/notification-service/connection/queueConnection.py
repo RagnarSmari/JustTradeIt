@@ -1,7 +1,7 @@
 import pika
 import os
 
-exchange_name = 'new-trade-queue'
+exchange_name = 'trade-exchange'
 
 def setup():
     queue_host = os.environ.get('QUEUE_HOST') or 'localhost'

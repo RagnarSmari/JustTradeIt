@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using JustTradeIt.Software.API.Models.Dtos;
 using JustTradeIt.Software.API.Models.Entities;
+using JustTradeIt.Software.API.Models.Exceptions;
 using JustTradeIt.Software.API.Models.InputModels;
 using JustTradeIt.Software.API.Repositories.Data;
 using JustTradeIt.Software.API.Repositories.Interfaces;
@@ -89,8 +90,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             var token = new JwtToken();
             if (user == null)
             {
-                // TODO throw exception
-                throw new Exception("User not found");
+                throw new ResourceNotFoundException("User not found");
             }
 
             var newuser = new UserDto

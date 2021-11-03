@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JustTradeIt.Software.API.Models.Dtos;
 using JustTradeIt.Software.API.Models.Enums;
+using JustTradeIt.Software.API.Models.Exceptions;
 using JustTradeIt.Software.API.Models.InputModels;
 using JustTradeIt.Software.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -27,22 +28,27 @@ namespace JustTradeIt.Software.API.Controllers
         {
             var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             IEnumerable<TradeDto> allTrades;
-            if (onlyCompleted && !onlyIncludeActive)
+
+
+            if (onlyCompleted && onlyIncludeActive)
             {
+                // Both true
+                allTrades = _tradesService.GetTrades(email);
+            }
+            else if (onlyCompleted)
+            {
+                // Other one is true
                 allTrades = _tradesService.GetTrades(email);
             }
 
-            else if (onlyIncludeActive && !onlyCompleted)
+            else if (onlyIncludeActive)
             {
+                // Other one is true
                 allTrades = _tradesService.GetTradeRequests(email);
-            }
-            else if (onlyIncludeActive && onlyCompleted)
-            {
-                // Does not make sense to have both true my guys
-                throw new Exception("Cannot have both true");
             }
             else
             {
+                // Both false
                 var comple = _tradesService.GetTrades(email);
                 var active = _tradesService.GetTradeRequests(email);
                 allTrades = comple.Concat(active);
@@ -54,6 +60,10 @@ namespace JustTradeIt.Software.API.Controllers
         [Route("")]
         public IActionResult PostTrade([FromBody] TradeInputModel trade)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new ModelFormatException();
+            }
             var userName = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             var name = _tradesService.CreateTradeRequest(userName, trade);
             return Ok(name);

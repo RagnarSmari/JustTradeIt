@@ -30,9 +30,10 @@ namespace JustTradeIt.Software.API.Services.Implementations
 
         public void PublishMessage(string routingKey, object body)
         {
-            channel.ExchangeDeclare(exchange: "trade_exchange", type: ExchangeType.Direct);
+            
+            channel.ExchangeDeclare(exchange: "trade-exchange", type: ExchangeType.Direct, true);
 
-            channel.BasicPublish(exchange: "trade_exchange",
+            channel.BasicPublish(exchange: "trade-exchange",
                 routingKey: routingKey,
                 basicProperties: null,
                 body: ConvertJsonToBytes(body));

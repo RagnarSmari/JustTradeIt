@@ -4,6 +4,7 @@ using System.Linq;
 using JustTradeIt.Software.API.Models.Dtos;
 using JustTradeIt.Software.API.Models.Entities;
 using JustTradeIt.Software.API.Models.Enums;
+using JustTradeIt.Software.API.Models.Exceptions;
 using JustTradeIt.Software.API.Models.InputModels;
 using JustTradeIt.Software.API.Repositories.Data;
 using JustTradeIt.Software.API.Repositories.Interfaces;
@@ -34,8 +35,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             // Check if the users are null, if not continue
             if (myUser == null || otherUser == null)
             {
-                // TODO implement not found exception
-                throw new Exception();
+                throw new ResourceNotFoundException();
             }
             
             // If the user is trying to make a trade to himself -- does not make sense
@@ -63,6 +63,10 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             foreach (var item in trade.ItemsInTrade)
             {
                 var thisItem = _db.Items.FirstOrDefault(c => c.PublicIdentifier == item.Identifier);
+                if (thisItem == null)
+                {
+                    throw new Exception("Item not found");
+                }
                 // If the owner is the authenticated user
                 if (thisItem.Owner.Id == myUser.Id)
                 {
@@ -115,8 +119,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 .FirstOrDefault(c => c.PublicIdentifier == identifier);
             if (trade == null)
             {
-                // TODO implement notofund
-                throw new Exception("Trade was not found");
+                throw new ResourceNotFoundException();
             }
             
             // Issued date can be null as it only has value when the trade has been accepted
@@ -209,8 +212,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 
             if (user == null)
             {
-                // TODO implement not found exception
-                throw new Exception("User not found");
+                throw new ResourceNotFoundException("Couldn't find user");
             }
 
             var recTrades = _db.Trades
@@ -245,8 +247,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 
             if (user == null)
             {
-                // TODO implement not found exception
-                throw new Exception("User not found");
+                throw new ResourceNotFoundException("User not found");
             }
 
             var recTrades = _db.Trades
@@ -282,8 +283,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             Console.WriteLine(user.FullName);
             if (user == null)
             {
-                // TODO implement not found exception
-                throw new Exception("User not found");
+                throw new ResourceNotFoundException("User not found");
             }
 
             var recTrades = _db.Trades
@@ -377,7 +377,6 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 time = DateTime.Now;
             }
             
-
             trade.TradeStatus = newStatus;
             trade.ModifiedBy = user.FullName;
             trade.ModifiedDate = DateTime.Now;

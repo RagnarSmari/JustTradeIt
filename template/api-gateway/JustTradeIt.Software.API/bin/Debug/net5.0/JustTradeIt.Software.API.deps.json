@@ -1601,7 +1601,8 @@
       "JustTradeIt.Software.API.Models/1.0.0": {
         "dependencies": {
           "AWSSDK.S3": "3.7.3.19",
-          "Microsoft.AspNetCore.Http": "2.2.2"
+          "Microsoft.AspNetCore.Http": "2.2.2",
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "JustTradeIt.Software.API.Models.dll": {}

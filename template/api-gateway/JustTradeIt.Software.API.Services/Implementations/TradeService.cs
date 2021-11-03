@@ -22,9 +22,9 @@ namespace JustTradeIt.Software.API.Services.Implementations
 
         public string CreateTradeRequest(string email, TradeInputModel tradeRequest)
         {
-            // TODO Publish a message to RabbitMQ with the routing key 'new-trade-request' and include the required data
-            _queueService.PublishMessage("new-trade-request" , email);
-            return _tradeRepository.CreateTradeRequest(email, tradeRequest);
+            var id =  _tradeRepository.CreateTradeRequest(email, tradeRequest);
+            _queueService.PublishMessage("new-trade-request" , _tradeRepository.GetTradeByIdentifier(id).Receiver.Email);
+            return id;
         }
 
         public TradeDetailsDto GetTradeByIdentifer(string tradeIdentifier)
@@ -44,7 +44,7 @@ namespace JustTradeIt.Software.API.Services.Implementations
 
         public void UpdateTradeRequest(string identifier, string email, string status)
         {
-            // TODO Publish a message to RabbitMQ with the routing key 'trade-update-request'
+            // Change the status to enum type
             var myList = Enum.GetValues(typeof(TradeStatus))
                 .Cast<TradeStatus>()
                 .Select(v => v.ToString())

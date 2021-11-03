@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using JustTradeIt.Software.API.Models.Dtos;
 using JustTradeIt.Software.API.Models.InputModels;
 using System.Linq;
+using JustTradeIt.Software.API.Models.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JustTradeIt.Software.API.Controllers
 {
+    [Authorize]
     [Route("api/items")]
     [ApiController]
     public class ItemController : ControllerBase
@@ -34,6 +37,10 @@ namespace JustTradeIt.Software.API.Controllers
         [HttpPost, Route("")]
         public IActionResult NewITem([FromBody] ItemInputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                throw new ModelFormatException();
+            }
             var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             var item = _itemService.AddNewItem(email, model);
             return Ok(item);

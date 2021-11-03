@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "X96V2WQTSWISBtSwZ5JKsM3DV45Q7A3QBMrE50mbuBKThF8XTcYsx/nCARmjAA80LpAnxJ8CgfkoleUykAQJSQ==",
+  "dgSpecHash": "4hW0m61BGlJbWAg9iTASQJYly2KO/wy4PulIMwuKUmYciyyDwlV6JOKdHMcV3pSo7AiJaCFP2v5uwmepC1AoZg==",
   "success": true,
   "projectFilePath": "/home/ragnar/Documents/Háskóli/3.Önn/Vefþjónustur/Final/template/api-gateway/JustTradeIt.Software.API.Repositories/JustTradeIt.Software.API.Repositories.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,7 @@
     "/home/ragnar/.nuget/packages/microsoft.extensions.options/5.0.0/microsoft.extensions.options.5.0.0.nupkg.sha512",
     "/home/ragnar/.nuget/packages/microsoft.extensions.primitives/5.0.0/microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "/home/ragnar/.nuget/packages/microsoft.net.http.headers/2.2.0/microsoft.net.http.headers.2.2.0.nupkg.sha512",
+    "/home/ragnar/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
     "/home/ragnar/.nuget/packages/system.buffers/4.5.0/system.buffers.4.5.0.nupkg.sha512",
     "/home/ragnar/.nuget/packages/system.collections.immutable/5.0.0/system.collections.immutable.5.0.0.nupkg.sha512",
     "/home/ragnar/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
