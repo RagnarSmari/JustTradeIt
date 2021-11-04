@@ -42,7 +42,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             if (myUser.Id == otherUser.Id)
             {
                 // TODO implement error
-                throw new Exception("User cannot make trade to himself");
+                throw new CannotCreateTradeException("User cannot make trade to himself");
             }
 
 
@@ -65,7 +65,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 var thisItem = _db.Items.FirstOrDefault(c => c.PublicIdentifier == item.Identifier);
                 if (thisItem == null)
                 {
-                    throw new Exception("Item not found");
+                    throw new ResourceNotFoundException("Item not found");
                 }
                 // If the owner is the authenticated user
                 if (thisItem.Owner.Id == myUser.Id)
@@ -100,7 +100,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 // If the neither of the users that are part of the trade are owner of the item
                 else
                 {
-                    throw new Exception("An item in the trade is not linked to an participant of the trade request");
+                    throw new CannotCreateTradeException("An item in the trade is not linked to an participant of the trade request");
                 }
             }
 
@@ -320,7 +320,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             
             if (trade == null)
             {
-                throw new Exception("Trade not found");
+                throw new ResourceNotFoundException("Trade not found");
             }
             
             var recUser = _db.Users
@@ -332,32 +332,35 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 .Include(c => c.TradeItems)
                 .ThenInclude(c => c.Item)
                 .FirstOrDefault(c => c.Id == trade.SenderId);
-            
+            if (recUser == null || sendUser == null)
+            {
+                throw new ResourceNotFoundException("Either the receiver was not found or the sender");
+            }
             
             // Check if the tradestatus of the trade is active
             if (trade.TradeStatus != TradeStatus.Pending)
             {
-                throw new Exception("Can only update a trade if it is an active trade request");
+                throw new CannotUpdateTradeException("Status of the trade is not pending");
             }
             if (user == null)
             {
-                throw new Exception("User not Found");
+                throw new ResourceNotFoundException("User not Found");
             }
             
             // Check if the new tradestatus is either Pending og TimedOut
             if (newStatus == TradeStatus.Pending || newStatus == TradeStatus.TimedOut)
             {
-                throw new Exception("The new trade status can only be Accepted, Cancelled or Declined");
+                throw new CannotUpdateTradeException("New status of the trade is not valid");
             }
             
             // If the user is the recUser of the trade then he can either accept or decline
-            // If the user is the sendUser of the trade then he can only Accpet the trade
+            // If the user is the sendUser of the trade then he can only Accept the trade
             if (user.Id == sendUser.Id)
             {
 
                 if (newStatus != TradeStatus.Cancelled)
                 {
-                    throw new Exception("This user can only cancel the trade request as he is the Sender");
+                    throw new CannotUpdateTradeException("This user can only cancel the trade request as he is the Sender");
                 }
             }
             else
@@ -366,7 +369,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 {
                     if (newStatus != TradeStatus.Declined)
                     {
-                        throw new Exception("This user can only Accept or Decline the trade request");   
+                        throw new CannotUpdateTradeException("This user can only Accept or Decline the trade request");   
                     }
                 }
             }

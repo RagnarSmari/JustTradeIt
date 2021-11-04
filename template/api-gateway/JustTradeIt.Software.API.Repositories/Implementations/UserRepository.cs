@@ -52,8 +52,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             // Check if there is a user in the database with that email already
             if (_db.Users.FirstOrDefault(c => c.Email == inputModel.Email) != null)
             {
-                // TODO make new exception
-                throw new Exception("There is already a user with that email");
+                throw new ResourceAlreadyExistsException("There is already a user with that email");
             }
             // Create a new JWT token
             var token = new JwtToken();
@@ -108,7 +107,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             var user = _db.Users.FirstOrDefault(u => u.PublicIdentifier == userIdentifier);
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new ResourceNotFoundException("User not found");
             }
 
             return new UserDto
@@ -126,7 +125,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             var user = _db.Users.FirstOrDefault(u => u.Email == email);
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new ResourceNotFoundException("User not found");
             }
             // Change the name and the image
             user.FullName = profile.fullName;

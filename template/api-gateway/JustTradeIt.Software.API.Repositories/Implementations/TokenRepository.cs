@@ -1,5 +1,6 @@
 using System.Linq;
 using JustTradeIt.Software.API.Models.Entities;
+using JustTradeIt.Software.API.Models.Exceptions;
 using JustTradeIt.Software.API.Repositories.Data;
 using JustTradeIt.Software.API.Repositories.Interfaces;
 
@@ -25,13 +26,20 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
         public bool IsTokenBlacklisted(int tokenId)
         {
             var token = _db.JwtTokens.FirstOrDefault(t => t.Id == tokenId);
-            if (token == null) { return true; }
+            if (token == null)
+            {
+                throw new ResourceNotFoundException("Token does not exist");
+            }
             return token.Blacklisted; 
         }
 
         public void VoidToken(int tokenId)
         {
             var token = _db.JwtTokens.FirstOrDefault(t => t.Id == tokenId);
+            if (token == null)
+            {
+                throw new ResourceNotFoundException("Token does not exist");
+            }
             token.Blacklisted = true;
             _db.SaveChanges();
         }

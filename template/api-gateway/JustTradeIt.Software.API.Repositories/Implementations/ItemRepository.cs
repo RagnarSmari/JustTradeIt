@@ -29,15 +29,11 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 // Create the new item
                 itemCondition = CreateNewItemCondition(item.ConditionCode);
             }
-            // Check if the item already exists 
-            if (_db.Items.FirstOrDefault(c => c.Title == item.Title) != null)
-            {
-                throw new Exception("Item already exists with that Title");
-            }
+            
             var owner = _db.Users.FirstOrDefault(c => c.Email == email);
             if (owner == null)
             {
-                throw new Exception("Authenticated user not found");
+                throw new ResourceNotFoundException("Authenticated user not found");
             }
             var newItem = new Item{
                 PublicIdentifier = Guid.NewGuid().ToString(),
@@ -102,19 +98,10 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 });
             if (ascendingSortOrder)
             {
-                return new Envelope<ItemDto>{
-                    PageSize = pageSize,
-                    PageNumber = pageNumber,
-                    MaxPages = maxPages,
-                    Items = allItems.OrderBy(c => c.Title)
-                }; 
+                return new Envelope<ItemDto>(pageNumber, pageSize, allItems.OrderBy(c => c.Title));
             }
-            return new Envelope<ItemDto>{
-                PageSize = pageSize,
-                PageNumber = pageNumber,
-                MaxPages = maxPages,
-                Items = allItems.OrderByDescending(c => c.Title)
-            };
+
+            return new Envelope<ItemDto>(pageNumber, pageSize, allItems);
 
         }
 
@@ -172,7 +159,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             // TODO IMPLEMENT exception
             if (user.Id != item.Owner.Id)
             {
-                throw new Exception("Item is not linked to authenticated User");
+                throw new CannotDeleteItemException("Item is not linked to authenticated User");
             }
             
             // Soft delete the item

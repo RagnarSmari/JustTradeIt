@@ -14,10 +14,12 @@ namespace JustTradeIt.Software.API.Services.Implementations
         private readonly IModel channel;
         private readonly IConnection connection;
         private byte[] ConvertJsonToBytes(object obj) => Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(obj));
+        private readonly string _hostname = Environment.GetEnvironmentVariable("QUEUE_HOST") ?? "localhost"; 
+
 
         public QueueService()
         {
-            factory = new ConnectionFactory() { HostName = "localhost", UserName = "guest", Password = "guest" };
+            factory = new ConnectionFactory() { HostName = _hostname, UserName = "guest", Password = "guest" };
             connection = factory.CreateConnection();
             channel = connection.CreateModel();
         }
@@ -30,7 +32,7 @@ namespace JustTradeIt.Software.API.Services.Implementations
 
         public void PublishMessage(string routingKey, object body)
         {
-            
+            Console.WriteLine(routingKey);
             channel.ExchangeDeclare(exchange: "trade-exchange", type: ExchangeType.Direct, true);
 
             channel.BasicPublish(exchange: "trade-exchange",

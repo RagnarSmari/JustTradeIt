@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+<meta charset="UTF-8"> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Document
+</title>
+</head>
+<body>
+    <div id="receiver" style="background-color: beige;">
+        <h2>Receiver</h2>
+        <h3>Name: {rec_full_name}</h3><br>
+        <p>Email: {rec_email}</p><br>
+        <p>ProfileImage</p><br>
+        <img src=receiver["ProfileImageUrl"] width="100px" height="100px">
+        <br>
+        <h4>Receiver Items</h4><br>
+        {rec_items_html}
+    </div>
+
+    <div id="sender" style="background-color: beige;">
+        <h2>Sender</h2>
+        <h3>Name: {send_full_name}</h3>
+        <p>Email: {send_email}</p><br>
+        <p>ProfileImage</p><br>
+        <img src=send["ProfileImageUrl"] width="100px" height="100px">
+        <br>
+        <h4>Receiver Items</h4><br>
+        {send_items_html}
+    </div>
+
+    <div id="info" style="background-color: beige;">
+        <p>IssuedDate: {date_of_issue}</p><br>
+        <p>ModifiedDate: {date_of_mod}</p><br>
+        <p>Status: {status}</p>
+    </div>
+
+
+</body>
+</html>

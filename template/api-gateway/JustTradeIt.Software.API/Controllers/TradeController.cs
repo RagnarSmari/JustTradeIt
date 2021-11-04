@@ -27,9 +27,8 @@ namespace JustTradeIt.Software.API.Controllers
         public IActionResult GetAllTrades([FromQuery] bool onlyCompleted=false, [FromQuery] bool onlyIncludeActive=false)
         {
             var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
+            
             IEnumerable<TradeDto> allTrades;
-
-
             if (onlyCompleted && onlyIncludeActive)
             {
                 // Both true

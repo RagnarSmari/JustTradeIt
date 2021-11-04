@@ -23,8 +23,9 @@ namespace JustTradeIt.Software.API.Services.Implementations
         public string CreateTradeRequest(string email, TradeInputModel tradeRequest)
         {
             var id =  _tradeRepository.CreateTradeRequest(email, tradeRequest);
-            _queueService.PublishMessage("new-trade-request" , _tradeRepository.GetTradeByIdentifier(id).Receiver.Email);
-            return id;
+            var trade = _tradeRepository.GetTradeByIdentifier(id);
+            _queueService.PublishMessage("new-trade-request", trade.Receiver.Email);
+             return id;
         }
 
         public TradeDetailsDto GetTradeByIdentifer(string tradeIdentifier)
