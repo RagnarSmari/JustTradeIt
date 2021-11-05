@@ -41,7 +41,7 @@ namespace JustTradeIt.Software.API.Controllers
             {
                 throw new ModelFormatException();
             }
-            var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
+            var email = User.Identity.Name;
             var item = _itemService.AddNewItem(email, model);
             return CreatedAtRoute(routeName: "GetItemById", routeValues: new {identifier = item}, item);
         }
@@ -49,7 +49,7 @@ namespace JustTradeIt.Software.API.Controllers
         [HttpDelete, Route("{identifier}", Name="GetItemById")]
         public IActionResult DeleteITem(string identifier)
         {
-            var name = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
+            var name = User.Identity.Name;
             _itemService.RemoveItem(name, identifier);
             return NoContent();
         }

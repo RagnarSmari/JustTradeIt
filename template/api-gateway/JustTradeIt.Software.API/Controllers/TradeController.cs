@@ -26,7 +26,7 @@ namespace JustTradeIt.Software.API.Controllers
         [HttpGet, Route("")]
         public IActionResult GetAllTrades([FromQuery] bool onlyCompleted=false, [FromQuery] bool onlyIncludeActive=false)
         {
-            var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
+            var email = User.Identity.Name;
             
             IEnumerable<TradeDto> allTrades;
             if (onlyCompleted)
@@ -51,7 +51,7 @@ namespace JustTradeIt.Software.API.Controllers
             {
                 throw new ModelFormatException();
             }
-            var userName = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
+            var userName = User.Identity.Name;
             var name = _tradesService.CreateTradeRequest(userName, trade);
             return CreatedAtRoute(routeName: "GetTradeById", routeValues: new {identifier = name}, name);
         }
@@ -67,7 +67,7 @@ namespace JustTradeIt.Software.API.Controllers
         [HttpPatch, Route("{identifier}")]
         public IActionResult PutTrade(string identifier, [FromBody] string newStatus)
         {
-            string name = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
+            string name = User.Identity.Name;
             _tradesService.UpdateTradeRequest(identifier, name, newStatus);
             return NoContent();
         }
