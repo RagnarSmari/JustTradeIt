@@ -22,9 +22,9 @@ namespace JustTradeIt.Software.API.Services.Implementations
             return _itemRepo.GetItemByIdentifier(identifier);
         }
 
-        public Envelope<ItemDto> GetItems(int maxPages,int pageSize, int pageNumber, bool ascendingSortOrder)
+        public Envelope<ItemDto> GetItems(int pageSize, int pageNumber, bool ascendingSortOrder)
         {
-            return _itemRepo.GetAllItems(maxPages ,pageSize, pageNumber, ascendingSortOrder);
+            return _itemRepo.GetAllItems(pageSize, pageNumber, ascendingSortOrder);
         }
 
         public void RemoveItem(string email, string itemIdentifier)

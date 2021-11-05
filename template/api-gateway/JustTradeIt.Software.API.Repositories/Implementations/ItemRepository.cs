@@ -78,7 +78,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
 
         }
 
-        public Envelope<ItemDto> GetAllItems(int maxPages, int pageSize, int pageNumber, bool ascendingSortOrder)
+        public Envelope<ItemDto> GetAllItems(int pageSize, int pageNumber, bool ascendingSortOrder)
         {
             var allItems = _db.Items
                 .Include(c => c.Owner)
@@ -156,12 +156,32 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 .FirstOrDefault(c => c.PublicIdentifier == identifier);
             
             var user = _db.Users.FirstOrDefault(c => c.Email == email);
-            // TODO IMPLEMENT exception
+
+            var allTrades = _db.TradeItems
+                .Include(c => c.Trade)
+                .Where(c => c.ItemId == item.Id)
+                .Select(c => c.Trade);
+
+            var acceptedTrades = allTrades.Any(c => c.TradeStatus == TradeStatus.Accepted);
+
             if (user.Id != item.Owner.Id)
             {
                 throw new CannotDeleteItemException("Item is not linked to authenticated User");
             }
-            
+
+            if (acceptedTrades)
+            {
+                throw new CannotDeleteItemException("The trade which this item belongs to is already accepted");
+            }
+
+            var tradesToChange = allTrades.Where(c => c.TradeStatus != TradeStatus.Accepted);
+            foreach (var trade in tradesToChange)
+            {
+                trade.TradeStatus = TradeStatus.Cancelled;
+            }
+
+
+
             // Soft delete the item
             item.IsDeleted = true;
             

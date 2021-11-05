@@ -41,7 +41,6 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             // If the user is trying to make a trade to himself -- does not make sense
             if (myUser.Id == otherUser.Id)
             {
-                // TODO implement error
                 throw new CannotCreateTradeException("User cannot make trade to himself");
             }
 
@@ -215,6 +214,21 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 throw new ResourceNotFoundException("Couldn't find user");
             }
 
+            if (onlyIncludeActive)
+            {
+                return _db.Trades
+                    .Where(c => c.RecieverId == user.Id)
+                    .Where(c => c.TradeStatus == TradeStatus.Pending)
+                    .Select(c => new TradeDto
+                    {
+                        Identifier = c.PublicIdentifier,
+                        IssuedDate = c.IssueDate,
+                        ModifiedDate = c.ModifiedDate,
+                        ModifiedBy = c.ModifiedBy,
+                        Status = c.TradeStatus.ToString()
+                    }).AsEnumerable();
+            }
+            
             var recTrades = _db.Trades
                 .Where(c => c.RecieverId == user.Id)
                 .Where(c => c.TradeStatus != TradeStatus.Accepted)
@@ -237,6 +251,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                     ModifiedBy = c.ModifiedBy,
                     Status = c.TradeStatus.ToString()
                 });
+
             var allTrades = recTrades.Concat(sendTrades);
             return allTrades;
         }
@@ -421,6 +436,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                         ProfileImageUrl = c.Item.Owner.ProfileImageUrl
                     }
                 });
+            // Loop through each of the users items and check if they are deleted, if so
             _db.SaveChanges();
             return new TradeDetailsDto()
             {

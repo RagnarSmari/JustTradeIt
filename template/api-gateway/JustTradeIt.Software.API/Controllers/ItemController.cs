@@ -20,9 +20,9 @@ namespace JustTradeIt.Software.API.Controllers
             _itemService = itemService;
         }
         [HttpGet, Route("")]
-        public IActionResult GetAllItems(int pageNumber=1,int pageSize=1, int MaxPages=5 , [FromQuery] bool ascendingSortOrder=true)
+        public IActionResult GetAllItems(int pageNumber=1,int pageSize=1,[FromQuery] bool ascendingSortOrder=true)
         {
-            var allItems = _itemService.GetItems(pageNumber,pageSize, MaxPages, ascendingSortOrder );
+            var allItems = _itemService.GetItems(pageSize,pageNumber, ascendingSortOrder );
             return Ok(allItems);
         }
 
@@ -43,15 +43,15 @@ namespace JustTradeIt.Software.API.Controllers
             }
             var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             var item = _itemService.AddNewItem(email, model);
-            return Ok(item);
+            return CreatedAtRoute(routeName: "GetItemById", routeValues: new {identifier = item}, item);
         }
 
-        [HttpDelete, Route("{identifier}")]
+        [HttpDelete, Route("{identifier}", Name="GetItemById")]
         public IActionResult DeleteITem(string identifier)
         {
             var name = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             _itemService.RemoveItem(name, identifier);
-            return Ok();
+            return NoContent();
         }
         
         

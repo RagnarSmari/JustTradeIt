@@ -6,6 +6,7 @@ using JustTradeIt.Software.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using JustTradeIt.Software.API.Controllers;
 
 namespace JustTradeIt.Software.API.Controllers
 {
@@ -35,7 +36,7 @@ namespace JustTradeIt.Software.API.Controllers
             }
             // Creates a new user
             var user = _accountService.CreateUser(register);
-            return Ok(user);
+            return CreatedAtRoute(routeName: "GetProfileInformation", user);
         }
         
         
@@ -67,7 +68,7 @@ namespace JustTradeIt.Software.API.Controllers
             return NoContent();
         }
         
-        [HttpGet, Route("profile")]
+        [HttpGet, Route("profile", Name = "GetProfileInformation")]
         public IActionResult GetProfile()
         {
 

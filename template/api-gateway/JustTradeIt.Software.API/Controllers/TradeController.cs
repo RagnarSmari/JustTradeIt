@@ -29,30 +29,18 @@ namespace JustTradeIt.Software.API.Controllers
             var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             
             IEnumerable<TradeDto> allTrades;
-            if (onlyCompleted && onlyIncludeActive)
+            if (onlyCompleted)
             {
                 // Both true
-                allTrades = _tradesService.GetTrades(email);
-            }
-            else if (onlyCompleted)
-            {
-                // Other one is true
-                allTrades = _tradesService.GetTrades(email);
-            }
-
-            else if (onlyIncludeActive)
-            {
-                // Other one is true
-                allTrades = _tradesService.GetTradeRequests(email);
+                 allTrades =  _tradesService.GetTrades(email);
             }
             else
             {
-                // Both false
-                var comple = _tradesService.GetTrades(email);
-                var active = _tradesService.GetTradeRequests(email);
-                allTrades = comple.Concat(active);
+                allTrades =  _tradesService.GetTradeRequests(email, onlyIncludeActive);
             }
+            
             return Ok(allTrades);
+
         }
 
         [HttpPost]
@@ -65,10 +53,10 @@ namespace JustTradeIt.Software.API.Controllers
             }
             var userName = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
             var name = _tradesService.CreateTradeRequest(userName, trade);
-            return Ok(name);
+            return CreatedAtRoute(routeName: "GetTradeById", routeValues: new {identifier = name}, name);
         }
 
-        [HttpGet, Route("{identifier}")]
+        [HttpGet, Route("{identifier}", Name = "GetTradeById")]
         public IActionResult GetTrade(string identifier)
         {
             // Get a detailed version of a trade request

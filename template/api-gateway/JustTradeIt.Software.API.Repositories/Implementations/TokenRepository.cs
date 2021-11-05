@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Security.Authentication;
 using JustTradeIt.Software.API.Models.Entities;
 using JustTradeIt.Software.API.Models.Exceptions;
 using JustTradeIt.Software.API.Repositories.Data;
@@ -28,7 +29,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             var token = _db.JwtTokens.FirstOrDefault(t => t.Id == tokenId);
             if (token == null)
             {
-                throw new ResourceNotFoundException("Token does not exist");
+                throw new UnAuthorizedException("Need to login");
             }
             return token.Blacklisted; 
         }
@@ -38,7 +39,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             var token = _db.JwtTokens.FirstOrDefault(t => t.Id == tokenId);
             if (token == null)
             {
-                throw new ResourceNotFoundException("Token does not exist");
+                throw new UnAuthorizedException("Need to login");
             }
             token.Blacklisted = true;
             _db.SaveChanges();

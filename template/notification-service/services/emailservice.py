@@ -14,8 +14,7 @@ def send_update_email(ch, method, properties, data):
     print("Sending update email")
     parsed_msg = json.loads(data)
     receiver = parsed_msg["Receiver"]
-    representation = make_update_template(data)
-    email = receiver["Email"]
+    representation,email = make_update_template(data)
     send_simple_message(email, 'There was an update to one of your trades!', representation)
 
 def make_update_template(data):
@@ -83,7 +82,7 @@ def make_update_template(data):
 
 
 </body>
-</html>"""
+</html>""", status
 
 
 def send_simple_message(to, subject, body):
@@ -97,3 +96,9 @@ def send_simple_message(to, subject, body):
 			"subject": subject,
 			"html": body})
 
+
+def check_who_to_send(tradeStatus, rec_email, send_email):
+    if tradeStatus == "Accepted" or tradeStatus == "Declined":
+        return rec_email
+    else:
+        return send_email

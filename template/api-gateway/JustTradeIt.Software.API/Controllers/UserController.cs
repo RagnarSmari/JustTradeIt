@@ -19,7 +19,7 @@ namespace JustTradeIt.Software.API.Controllers
         }
         
         [HttpGet]
-        [Route("{identifier}")]
+        [Route("{identifier}", Name = "GetUserById")]
         public IActionResult GetUserInformation(string identifier)
         {
             var user = _userService.GetUserInformation(identifier);

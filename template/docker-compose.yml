@@ -27,7 +27,7 @@ services:
       QUEUE_HOST: "message-broker"
 
     ports:
-      - "82:5000"
+      - "5000:5000"
     networks:
       - "trade-network"
 

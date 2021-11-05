@@ -14,7 +14,6 @@ namespace JustTradeIt.Software.API.Middlewares
     {
         public static void UseGlobalExceptionHandler(this IApplicationBuilder app)
         {
-            // TODO: Implement
             app.UseExceptionHandler(error =>
             {
                 error.Run(async context =>
@@ -54,7 +53,11 @@ namespace JustTradeIt.Software.API.Middlewares
                         {
                             statusCode = (int) HttpStatusCode.BadRequest;
                         }
-
+                        else if (exception is UnAuthorizedException)
+                        {
+                            statusCode = (int) HttpStatusCode.Unauthorized;
+                        }
+                        
                         context.Response.StatusCode = statusCode;
                         context.Response.ContentType = "application/json";
                         

@@ -8,6 +8,7 @@ using JustTradeIt.Software.API.Models.InputModels;
 using JustTradeIt.Software.API.Repositories.Data;
 using JustTradeIt.Software.API.Repositories.Interfaces;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Http;
 
 namespace JustTradeIt.Software.API.Repositories.Implementations
 {
@@ -68,6 +69,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 Email = inputModel.Email,
                 HashedPassword = HashPassword(inputModel.Password, _salt)
             };
+            var imageUrl = "https://raggistradebucket.s3.eu-west-1.amazonaws.com/asd.jpg";
             
             // Add the stuff to the database, save changes and return the userDto
             _db.Users.Add(user);
@@ -79,7 +81,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
                 Identifier = user.PublicIdentifier,
                 FullName = user.FullName,
                 Email = user.Email,
-                ProfileImageUrl = user.ProfileImageUrl,
+                ProfileImageUrl = imageUrl
             };
         }
 

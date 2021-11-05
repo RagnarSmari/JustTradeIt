@@ -4,7 +4,7 @@ namespace JustTradeIt.Software.API.Models.Exceptions
 {
     public class ResourceNotFoundException : Exception
     {
-        public ResourceNotFoundException() : base("The resource was not found.") {}
+        public ResourceNotFoundException() : base() {}
         
         public ResourceNotFoundException(string message) : base(message) {}
         

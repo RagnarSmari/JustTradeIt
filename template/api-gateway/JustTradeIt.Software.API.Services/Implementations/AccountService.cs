@@ -28,7 +28,7 @@ namespace JustTradeIt.Software.API.Services.Implementations
         public UserDto CreateUser(RegisterInputModel inputModel)
         {
             
-            return _userRepository.CreateUser(inputModel);
+            return  _userRepository.CreateUser(inputModel);
         }
 
         public UserDto GetProfileInformation(string name)
