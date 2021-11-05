@@ -19,8 +19,9 @@ Link to the bucket:
 	https://s3.console.aws.amazon.com/s3/buckets/raggistradebucket?region=eu-west-1&tab=objects
 
 
-
-
+The project is also on github
+https://github.com/RagnarSmari/JustTradeIt
+	
 
 
 
