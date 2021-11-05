@@ -186,11 +186,11 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             item.IsDeleted = true;
             
             // Get all the trades and mark them as cancelled
-            var tradeItems = item.TradeItems.Select(c => c.Trade);
-            foreach (var tradeItem in tradeItems)
-            {
-                tradeItem.TradeStatus = TradeStatus.Cancelled;
-            }
+            // var tradeItems = item.TradeItems.Select(c => c.Trade);
+            // foreach (var tradeItem in tradeItems)
+            // {
+            //     tradeItem.TradeStatus = TradeStatus.Cancelled;
+            // }
             _db.SaveChanges();
 
         }

@@ -55,8 +55,6 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             {
                 throw new ResourceAlreadyExistsException("There is already a user with that email");
             }
-            // Create a new JWT token
-            var token = new JwtToken();
             // Create a new identifier for the new user
             var identifier = Guid.NewGuid().ToString();
             
@@ -73,8 +71,7 @@ namespace JustTradeIt.Software.API.Repositories.Implementations
             
             // Add the stuff to the database, save changes and return the userDto
             _db.Users.Add(user);
-            _db.JwtTokens.Add(token);
-            
+
             _db.SaveChanges();
             return new UserDto()
             {

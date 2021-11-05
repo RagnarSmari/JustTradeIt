@@ -1,9 +1,13 @@
+skoða authentication error 
 
-Skoða hverjum ég sendi póst þegar eh acceptar trade request
+láta gústa vita:
+	Checka á envel
+	Skila CreatedAtRoute
+	
 
-kikja á filter í get trades
+Skoða hvort ég sendi ekki réttum aðila email þegar hann gerir update á trade request
 
-
+Testa öll routes og testa eftir rubricinu
 
 
 

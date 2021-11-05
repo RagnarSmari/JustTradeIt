@@ -8,6 +8,7 @@ using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
+using JustTradeIt.Software.API.Models.Exceptions;
 using JustTradeIt.Software.API.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -59,7 +60,7 @@ namespace JustTradeIt.Software.API.Services.Implementations
                 return URI + fileName;
             }
 
-            throw new Exception("Image was not successfully uploaded to AWS");
+            throw new ModelFormatException("Image was not successfully uploaded");
 
         }
     }

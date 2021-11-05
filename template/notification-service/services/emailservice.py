@@ -12,8 +12,6 @@ def send_newOrder_email(ch, method, properties, data):
 
 def send_update_email(ch, method, properties, data):
     print("Sending update email")
-    parsed_msg = json.loads(data)
-    receiver = parsed_msg["Receiver"]
     representation,email = make_update_template(data)
     send_simple_message(email, 'There was an update to one of your trades!', representation)
 
@@ -41,6 +39,7 @@ def make_update_template(data):
     date_of_issue = parsed_msg["IssuedDate"]
     date_of_mod = parsed_msg["ModifiedDate"]
     status = parsed_msg["Status"]
+    email = check_who_to_send(status, rec_email, send_email)
     return f"""<!DOCTYPE html>
 <html lang="en">
 
@@ -82,12 +81,11 @@ def make_update_template(data):
 
 
 </body>
-</html>""", status
+</html>""", email
 
 
 def send_simple_message(to, subject, body):
-    print(to)
-    print("Sending")
+    print("Sending to : " + to)
     return requests.post(
 		"https://api.mailgun.net/v3/sandbox3efe989e013e4084819e9d1051eb8cf3.mailgun.org/messages",
 		auth=("api", "f8605503671ef6b358df0b4d7d7dce01-2ac825a1-b7cd9c89"),
@@ -99,6 +97,6 @@ def send_simple_message(to, subject, body):
 
 def check_who_to_send(tradeStatus, rec_email, send_email):
     if tradeStatus == "Accepted" or tradeStatus == "Declined":
-        return rec_email
-    else:
         return send_email
+    else:
+        return rec_email

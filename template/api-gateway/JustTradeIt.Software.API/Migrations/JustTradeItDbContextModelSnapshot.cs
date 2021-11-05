@@ -78,7 +78,7 @@ namespace JustTradeIt.Software.API.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ItemId")
+                    b.Property<int>("ItemId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -205,7 +205,9 @@ namespace JustTradeIt.Software.API.Migrations
                 {
                     b.HasOne("JustTradeIt.Software.API.Models.Entities.Item", "Item")
                         .WithMany("ItemImages")
-                        .HasForeignKey("ItemId");
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Item");
                 });

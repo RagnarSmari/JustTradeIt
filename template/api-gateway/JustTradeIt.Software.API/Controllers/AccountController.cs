@@ -36,7 +36,8 @@ namespace JustTradeIt.Software.API.Controllers
             }
             // Creates a new user
             var user = _accountService.CreateUser(register);
-            return CreatedAtRoute(routeName: "GetProfileInformation", user);
+            var token = _tokenService.GenerateJwtToken(user);
+            return Ok(token);
         }
         
         
@@ -62,7 +63,6 @@ namespace JustTradeIt.Software.API.Controllers
         [Route("logout")]
         public IActionResult Logout()
         {
-            var m = User.Claims;
             int.TryParse(User.Claims.FirstOrDefault(c => c.Type == "tokenId").Value, out var tokenId);
             _accountService.Logout(tokenId);
             return NoContent();
@@ -72,7 +72,7 @@ namespace JustTradeIt.Software.API.Controllers
         public IActionResult GetProfile()
         {
 
-            var name = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
+            var name = User.Identity.Name;
             var user = _accountService.GetProfileInformation(name);
             return Ok(user);
         }
@@ -84,7 +84,7 @@ namespace JustTradeIt.Software.API.Controllers
             {
                 throw new ModelFormatException();
             }
-            var email = User.Claims.FirstOrDefault(c => c.Type == "name").Value;
+            var email = User.Identity.Name;
             _accountService.UpdateProfile(email, profile);
             return NoContent();
         }
